@@ -1,6 +1,7 @@
 from typing import Any
 from django.shortcuts import render
 from django.views.generic import TemplateView,RedirectView,ListView,DeleteView,CreateView,UpdateView,DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post
 
 class IndexView(TemplateView):
@@ -24,13 +25,13 @@ class PostDetail(DeleteView):
     template_name="blog/post.html"
     queryset=Post.objects.filter(Active=1)
     
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin,CreateView):
     template_name="blog/create.html"
     model=Post
     fields=["title","content","author","category"]
     success_url="/blog/posts/"
     
-class PostUpdate(UpdateView):
+class PostUpdate(UpdateView,LoginRequiredMixin):
     template_name="blog/create.html"
     model=Post
     fields=["title","content"]
