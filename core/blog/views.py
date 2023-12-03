@@ -1,7 +1,6 @@
-from typing import Any
 from django.shortcuts import render
 from django.views.generic import TemplateView,RedirectView,ListView,DeleteView,CreateView,UpdateView,DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from .models import Post
 
 class IndexView(TemplateView):
@@ -21,7 +20,8 @@ class PostList(ListView):
     model=Post
     context_object_name="posts"
     
-class PostDetail(DeleteView):
+class PostDetail(PermissionRequiredMixin,DeleteView):
+    permission_required = 'blog.view_post'
     template_name="blog/post.html"
     queryset=Post.objects.filter(Active=1)
     
@@ -31,7 +31,8 @@ class PostCreate(LoginRequiredMixin,CreateView):
     fields=["title","content","author","category"]
     success_url="/blog/posts/"
     
-class PostUpdate(UpdateView,LoginRequiredMixin):
+class PostUpdate(PermissionRequiredMixin,UpdateView):
+    permission_required = 'blog.update_post'
     template_name="blog/create.html"
     model=Post
     fields=["title","content"]

@@ -10,7 +10,7 @@ class Post(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
     image=models.ImageField(blank=True,null=True)
-    author=models.ForeignKey(user,on_delete=models.CASCADE)
+    author=models.ForeignKey('accounts.Profile',on_delete=models.CASCADE)
     category=models.ForeignKey('Category',on_delete=models.CASCADE)
     
     def __str__(self):
