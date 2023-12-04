@@ -6,6 +6,7 @@ from .serializers import PostSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
+from rest_framework.viewsets import ModelViewSet
 
 @api_view()
 def index(request):
@@ -94,6 +95,7 @@ class PostDetailGeneric(RetrieveUpdateDestroyAPIView):
     permission_classes =[IsAuthenticated]
     queryset =Post.objects.filter(Active=1)
     
-
-    
-    
+class PostViewSet(ModelViewSet):
+    serializer_class = PostSerializer
+    permission_classes =[IsAuthenticated]
+    queryset =Post.objects.filter(Active=1)
