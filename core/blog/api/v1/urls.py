@@ -4,6 +4,6 @@ from . import views
 app_name='api-v1'
 urlpatterns=[
     path('index/',views.index,name='index'),
-    path('posts/',views.posts,name='posts'),
-    path('post/<int:pk>/',views.post_detail,name='post_detail'),
+    path('posts/',views.PostListGeneric.as_view(),name='posts'),
+    path('post/<int:pk>/',views.PostDetailGeneric.as_view(),name='post_detail'),
 ]

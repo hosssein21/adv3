@@ -10,5 +10,5 @@ urlpatterns = [
     path('post/create/',views.PostCreate.as_view(),name='create'),
     path('post/update/<int:pk>/',views.PostUpdate.as_view(),name='update'),
     path('post/delete/<int:pk>/',views.PostDelete.as_view(),name='delete'),
-    path('api/v1/',include('blog.api.v1')),
+    path('api/v1/',include('blog.api.v1.urls')),
 ]
