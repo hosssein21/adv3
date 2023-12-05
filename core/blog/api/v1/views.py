@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework import status
-from ...models import Post
+from ...models import Post,Category
 from .serializers import PostSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -99,3 +99,8 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     permission_classes =[IsAuthenticated]
     queryset =Post.objects.filter(Active=1)
+    
+
+class CategoryViewSet(ModelViewSet):
+    queryset = Category.objects.all()
+    
