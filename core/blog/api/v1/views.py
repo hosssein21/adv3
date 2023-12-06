@@ -3,10 +3,12 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework import status
 from ...models import Post,Category
 from .serializers import PostSerializer
+from .pagination import DefaultPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
 
 @api_view()
 def index(request):
@@ -99,8 +101,13 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     permission_classes =[IsAuthenticated]
     queryset =Post.objects.filter(Active=1)
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category', 'author','status']
+    search_fields = ['title', 'content']
+    ordering_fields=['created_time']
+    pagination_class =DefaultPagaintion
     
-
+    
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     
