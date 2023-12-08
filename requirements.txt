@@ -6,3 +6,6 @@ pillow
 djangorestframework
 django-filter
 markdown
+
+#documentation
+drf_yasg

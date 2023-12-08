@@ -105,7 +105,7 @@ class PostViewSet(ModelViewSet):
     filterset_fields = ['category', 'author','status']
     search_fields = ['title', 'content']
     ordering_fields=['created_time']
-    pagination_class =DefaultPagaintion
+    pagination_class = DefaultPagination
     
     
 class CategoryViewSet(ModelViewSet):
